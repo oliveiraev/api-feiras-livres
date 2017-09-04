@@ -1,0 +1,166 @@
+# -*- coding: utf-8 -*-
+# vim: sta sts=2 sw=2 et ai si ff=unix eol fenc=utf-8 nobomb ft=yaml
+# https://pre-commit.com
+---
+# General purpose, language agnostic
+- repo: https://github.com/pre-commit/pre-commit-hooks.git
+  sha: master
+  hooks:
+    - id: check-added-large-files
+      name: "General: looking for 500Kb+ files"
+      stages: [commit]
+    - id: check-byte-order-marker
+      name: "General: looking for UTF Byte Order Mark"
+      stages: [commit]
+      types: [text]
+    - id: end-of-file-fixer
+      name: "General: looking for missing EOF Linefeed"
+      stages: [commit]
+      types: [text]
+    - id: trailing-whitespace
+      name: "General: looking for trailing whitespaces"
+      stages: [commit]
+      types: [text]
+    - id: check-case-conflict
+      name: "General: looking for name case conflict"
+      stages: [commit]
+    - id: check-symlinks
+      name: "General: looking for broken symlinks"
+      stages: [commit]
+    - id: check-merge-conflict
+      name: "General: looking for GIT conflict marker"
+      stages: [commit]
+    - id: detect-private-key
+      name: "General: looking for private keys"
+      stages: [commit]
+    - id: fix-encoding-pragma
+      name: "General: looking for missing # -*- utf-8 -*-"
+      stages: [commit]
+      types: [text]
+    - id: check-executables-have-shebangs
+      name: "General: looking for missing hash bangs on executables"
+      stages: [commit]
+- repo: https://github.com/Lucas-C/pre-commit-hooks.git
+  sha: master
+  hooks:
+    - id: remove-crlf
+      name: "General: looking for CRLF linefeed"
+      stages: [commit]
+      types: [text]
+      exclude_types: [batch]
+    - id: remove-tabs
+      name: "General: looking for TABS used for indentation"
+      stages: [commit]
+      types: [text]
+      exclude_types: [makefile]
+
+# JSON
+- repo: https://github.com/pre-commit/pre-commit-hooks.git
+  sha: master
+  hooks:
+    - id: check-json
+      name: "JSON: syntax check"
+      stages: [commit]
+      types: [json]
+    - id: pretty-format-json
+      name: "JSON: indenting with 2 spaces and rearranging properties"
+      args: [--autofix, --indent=2]
+      stages: [commit]
+      types: [json]
+- repo: https://github.com/Lucas-C/pre-commit-hooks.git
+  sha: master
+  hooks:
+    - id: remove-tabs
+      name: "JSON: replacing tabs with 2 whitespaces"
+      args: [--whitespaces-count=2]
+      stages: [commit]
+      types: [json]
+
+# Python
+- repo: https://github.com/pre-commit/pre-commit-hooks.git
+  sha: master
+  hooks:
+    - id: requirements-txt-fixer
+      name: "Python: rearranging requirements.txt"
+      stages: [commit]
+    - id: check-ast
+      name: "Python: syntax check"
+      stages: [commit]
+      types: [python]
+    - id: debug-statements
+      name: "Python: looking for debug commands"
+      stages: [commit]
+      types: [python]
+    - id: check-docstring-first
+      name: "Python: looking for bad docstring"
+      stages: [commit]
+      types: [python]
+    - id: autopep8-wrapper
+      name: "Python: Pep8"
+      stages: [commit]
+      types: [python]
+    - id: flake8
+      name: "Python: Flake8"
+      stages: [commit]
+      types: [python]
+- repo: https://github.com/pre-commit/mirrors-pylint.git
+  sha: master
+  hooks:
+    - id: pylint
+      name: "Python: pylint"
+      stages: [commit]
+      types: [python]
+- repo: https://github.com/FalconSocial/pre-commit-mirrors-pep257.git
+  sha: master
+  hooks:
+    - id: pep257
+      name: "Python: PEP257"
+      stages: [commit]
+      types: [python]
+- repo: https://github.com/Lucas-C/pre-commit-hooks-safety.git
+  sha: master
+  hooks:
+    - id: python-safety-dependencies-check
+      name: "Python: looking for unsafe dependencies"
+      stages: [commit]
+      types: [python]
+- repo: https://github.com/Lucas-C/pre-commit-hooks-bandit.git
+  sha: master
+  hooks:
+    - id: python-bandit-vulnerability-check
+      name: "Python: looking for vulnerabilities"
+      stages: [commit]
+      types: [python]
+
+# Shellscript
+- repo: https://github.com/detailyang/pre-commit-shell.git
+  sha: master
+  hooks:
+    - id: shell-lint
+      name: "Shellscript: lint"
+      stages: [commit]
+      types: [shell]
+
+# Yaml
+- repo: https://github.com/pre-commit/pre-commit-hooks.git
+  sha: master
+  hooks:
+    - id: check-yaml
+      name: "Yaml: syntax check"
+      stages: [commit]
+      types: [yaml]
+- repo: https://github.com/adrienverge/yamllint.git
+  sha: master
+  hooks:
+    - id: yamllint
+      name: "Yaml: lint"
+      stages: [commit]
+      types: [yaml]
+- repo: https://github.com/Lucas-C/pre-commit-hooks.git
+  sha: master
+  hooks:
+    - id: remove-tabs
+      name: "Yaml: replacing tabs with 2 whitespaces"
+      args: [--whitespaces-count=2]
+      stages: [commit]
+      types: [yaml]
