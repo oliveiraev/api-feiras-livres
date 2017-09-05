@@ -22,6 +22,8 @@ services:
       - "3306:3306"
     entrypoint: ["/usr/local/bin/piped-std"]
     command: ["/usr/local/bin/docker-entrypoint.sh", "mysqld"]
+
+  # Flask app
   feiras-sp-v1:
     build:
       context: "./conf"
@@ -35,9 +37,13 @@ services:
       - 9000
     volumes:
       - "./conf/etc/uwsgi:/etc/uwsgi"
+      - "./conf/usr/local/bin/piped-std:/usr/local/bin/piped-std"
+      - "./conf/usr/local/bin/uwsgi:/usr/local/bin/uwsgi"
       - ".:/home/feiras-sp-v1"
     depends_on:
       - "db.feiras-sp.com.br"
+    entrypoint: ["/usr/local/bin/piped-std"]
+    command: ["uwsgi", "--ini=/etc/uwsgi/uwsgi.ini"]
 
   # Nginx
   api.feiras-sp.com.br:
