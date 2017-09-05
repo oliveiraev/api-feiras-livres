@@ -4,6 +4,8 @@
 ---
 version: "2.2"
 services:
+
+  # MySQL
   db.feiras-sp.com.br:
     image: "mysql:latest"
     env_file:
@@ -12,8 +14,14 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     expose:
       - 3306
+    volumes:
+      - "./conf/etc/mysql:/etc/mysql"
+      - "./conf/usr/local/bin/piped-std:/usr/local/bin/piped-std"
+      - "./conf/usr/local/bin/mysqld:/usr/local/bin/mysqld"
     ports:
       - "3306:3306"
+    entrypoint: ["/usr/local/bin/piped-std"]
+    command: ["/usr/local/bin/docker-entrypoint.sh", "mysqld"]
   feiras-sp-v1:
     build:
       context: "./conf"
