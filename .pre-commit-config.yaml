@@ -105,13 +105,6 @@
       name: "Python: Flake8"
       stages: [commit]
       types: [python]
-- repo: https://github.com/pre-commit/mirrors-pylint.git
-  sha: master
-  hooks:
-    - id: pylint
-      name: "Python: pylint"
-      stages: [commit]
-      types: [python]
 - repo: https://github.com/FalconSocial/pre-commit-mirrors-pep257.git
   sha: master
   hooks:
@@ -133,6 +126,16 @@
       name: "Python: looking for vulnerabilities"
       stages: [commit]
       types: [python]
+- repo: local
+  hooks:
+    - id: pylint
+      name: "Python: pylint"
+      language: system
+      stages: [commit]
+      types: [python]
+      entry: python
+      args: ["-m", "pylint"]
+
 
 # Shellscript
 - repo: https://github.com/detailyang/pre-commit-shell.git
