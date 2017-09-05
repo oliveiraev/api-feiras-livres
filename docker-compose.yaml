@@ -30,6 +30,8 @@ services:
       - ".:/home/feiras-sp-v1"
     depends_on:
       - "db.feiras-sp.com.br"
+
+  # Nginx
   api.feiras-sp.com.br:
     image: "nginx:stable-alpine"
     ports:
@@ -38,6 +40,10 @@ services:
     volumes:
       - "./conf/etc/nginx:/etc/nginx"
       - "./conf/etc/ssl/hosts:/etc/ssl/hosts"
+      - "./conf/usr/local/bin/piped-std:/usr/local/bin/piped-std"
+      - "./conf/usr/local/bin/nginx:/usr/local/bin/nginx"
       - "./docs:/var/www/html"
     depends_on:
       - "feiras-sp-v1"
+    entrypoint: ["/usr/local/bin/piped-std"]
+    command: ["nginx", "-g", "daemon\ off;"]

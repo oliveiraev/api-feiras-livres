@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+# -*- coding: utf-8 -*-
+# vim: sta sts=4 sw=4 et ai si ff=unix eol fenc=utf-8 nobomb ft=sh
+
+set -e
+
+mkdir -p -m0773 /var/log/nginx
+rm -f /var/log/nginx/*.log
+ln -sf /usr/local/dev/stdout -T /var/log/nginx/access.log
+ln -sf /usr/local/dev/stderr -T /var/log/nginx/error.log
+
+for app in /etc/nginx/sites-enabled/*; do
+    filename=$(basename $app)
+    ln -sf /usr/local/dev/stdout -T /var/log/nginx/$filename.access.log
+    ln -sf /usr/local/dev/stderr -T /var/log/nginx/$filename.error.log
+done
+
+exec /usr/sbin/nginx "${*}"
