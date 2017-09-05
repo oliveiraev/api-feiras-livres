@@ -33,10 +33,12 @@
     - id: detect-private-key
       name: "General: looking for private keys"
       stages: [commit]
+      exclude: conf/etc/ssl/hosts
     - id: fix-encoding-pragma
       name: "General: looking for missing # -*- utf-8 -*-"
       stages: [commit]
       types: [text]
+      exclude: conf/etc/ssl/hosts
     - id: check-executables-have-shebangs
       name: "General: looking for missing hash bangs on executables"
       stages: [commit]

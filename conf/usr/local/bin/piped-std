@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+# -*- coding: utf-8 -*-
+# vim: sta sts=4 sw=4 et ai si ff=unix eol fenc=utf-8 nobomb ft=sh
+
+set -e
+
+mkdir -p -m0751 /usr/local/dev
+
+rm -f /usr/local/dev/stdout && mkfifo -m0777 /usr/local/dev/stdout
+test -e /usr/local/dev/stdout && cat <> /usr/local/dev/stdout 1>&2 &
+
+rm -f /usr/local/dev/stderr && mkfifo -m0777 /usr/local/dev/stderr
+test -e /usr/local/dev/stderr && cat <> /usr/local/dev/stderr 1>&2 &
+
+exec ${@}

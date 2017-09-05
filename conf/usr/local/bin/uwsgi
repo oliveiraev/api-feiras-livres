@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+# -*- coding: utf-8 -*-
+# vim: sta sts=4 sw=4 et ai si ff=unix eol fenc=utf-8 nobomb ft=sh
+
+set -e
+
+mkdir -p -m0773 /var/log/uwsgi
+rm -f /var/log/uwsgi/uwsgi.log
+ln -sf /usr/local/dev/stdout -T /var/log/uwsgi/uwsgi.log
+
+for app in /etc/uwsgi/vassals-enabled/*; do
+    ext=$(echo $app | awk -F'.' '{print $NF}')
+    filename=$(basename $app .$ext)
+    test -n $filename || break
+    groupadd -f -g $APP_UID -o -r $filename
+    useradd -g $APP_UID -M -N -o -r -s /bin/bash -u $APP_UID $filename || :
+    ln -sf /usr/local/dev/stdout -T /var/log/uwsgi/$filename.log
+done
+
+exec /usr/bin/uwsgi ${*}

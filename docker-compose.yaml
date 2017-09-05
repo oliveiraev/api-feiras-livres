@@ -1,0 +1,63 @@
+# -*- coding: utf-8 -*-
+# vim: sta sts=2 sw=2 et ai si ff=unix eol fenc=utf-8 nobomb ft=yaml
+# https://docs.docker.com/compose/gettingstarted/
+---
+version: "2.2"
+services:
+
+  # MySQL
+  db.feiras-sp.com.br:
+    image: "mysql:latest"
+    env_file:
+      - "defaults.env"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    expose:
+      - 3306
+    volumes:
+      - "./conf/etc/mysql:/etc/mysql"
+      - "./conf/usr/local/bin/piped-std:/usr/local/bin/piped-std"
+      - "./conf/usr/local/bin/mysqld:/usr/local/bin/mysqld"
+    ports:
+      - "3306:3306"
+    entrypoint: ["/usr/local/bin/piped-std"]
+    command: ["/usr/local/bin/docker-entrypoint.sh", "mysqld"]
+
+  # Flask app
+  feiras-sp-v1:
+    build:
+      context: "./conf"
+      dockerfile: "feiras-sp-v1.Dockerfile"
+      args:
+        APP_UID: "${UID:-1000}"
+    scale: 2
+    env_file:
+      - "defaults.env"
+    expose:
+      - 9000
+    volumes:
+      - "./conf/etc/uwsgi:/etc/uwsgi"
+      - "./conf/usr/local/bin/piped-std:/usr/local/bin/piped-std"
+      - "./conf/usr/local/bin/uwsgi:/usr/local/bin/uwsgi"
+      - ".:/home/feiras-sp-v1"
+    depends_on:
+      - "db.feiras-sp.com.br"
+    entrypoint: ["/usr/local/bin/piped-std"]
+    command: ["uwsgi", "--ini=/etc/uwsgi/uwsgi.ini"]
+
+  # Nginx
+  api.feiras-sp.com.br:
+    image: "nginx:stable-alpine"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./conf/etc/nginx:/etc/nginx"
+      - "./conf/etc/ssl/hosts:/etc/ssl/hosts"
+      - "./conf/usr/local/bin/piped-std:/usr/local/bin/piped-std"
+      - "./conf/usr/local/bin/nginx:/usr/local/bin/nginx"
+      - "./docs:/var/www/html"
+    depends_on:
+      - "feiras-sp-v1"
+    entrypoint: ["/usr/local/bin/piped-std"]
+    command: ["nginx", "-g", "daemon\ off;"]
