@@ -2,4 +2,7 @@
 # vim: sta sts=4 sw=4 et ai si ff=unix eol fenc=utf-8 nobomb ft=conf
 behave
 flask
+flask_sqlalchemy
+https://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-2.1.7.tar.gz#f7a929752273616e0100bda066101469
 mock
+requests
