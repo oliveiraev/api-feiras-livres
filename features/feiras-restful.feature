@@ -171,14 +171,14 @@ Feature: Entry testing
 
   Scenario: Entry validation
     When request data is
-        | numero |
-        | NaN    |
+        | codsubpref   |
+        | Not a number |
     And I post to /feiras
     Then response code should be 400
     And response body should match
     """
     {
-      "error": "Bad request."
+      "error": "Incorrect value for codsubpref: \\"Not a number\\""
     }
     """
 

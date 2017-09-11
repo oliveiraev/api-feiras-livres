@@ -3,7 +3,9 @@
 u"""Manipuladores de feiras."""
 
 
+import werkzeug.exceptions
 import sqlalchemy.exc
+import flask_validator
 from src.models import db, Model
 
 
@@ -29,9 +31,25 @@ class Feira(Model):  # pylint: disable=too-few-public-methods
     referencia = db.Column(db.String(254))
 
     def __init__(self, **fields):
-        u"""Inicializador da instância popula os campos recebidos."""
+        u"""Valida os campos numéricos antes de definir seus valores."""
+        try:
+            for field in "id", "coddist", "codsubpref":
+                if field not in fields:
+                    continue
+                fields[field] = int(fields[field])
+        except (ValueError, TypeError):
+            message_template = "Incorrect value for {}: \"{}\""
+            message = message_template.format(field, fields[field])
+            raise werkzeug.exceptions.BadRequest(description=message)
         self.update(**fields)
         Model.__init__(self)
+
+    @classmethod
+    def __declare_last__(cls):
+        u"""Validação do flask_validator."""
+        flask_validator.ValidateNumeric(cls.id)
+        flask_validator.ValidateNumeric(cls.coddist)
+        flask_validator.ValidateNumeric(cls.codsubpref)
 
 
 try:
