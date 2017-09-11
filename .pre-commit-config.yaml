@@ -38,7 +38,8 @@
       name: "General: looking for missing # -*- utf-8 -*-"
       stages: [commit]
       types: [text]
-      exclude: conf/etc/ssl/hosts|\.csv$
+      exclude_types: [csv, markdown]
+      exclude: conf/etc/ssl/hosts
     - id: check-executables-have-shebangs
       name: "General: looking for missing hash bangs on executables"
       stages: [commit]
@@ -117,13 +118,6 @@
   hooks:
     - id: python-safety-dependencies-check
       name: "Python: looking for unsafe dependencies"
-      stages: [commit]
-      types: [python]
-- repo: https://github.com/Lucas-C/pre-commit-hooks-bandit.git
-  sha: master
-  hooks:
-    - id: python-bandit-vulnerability-check
-      name: "Python: looking for vulnerabilities"
       stages: [commit]
       types: [python]
 - repo: local

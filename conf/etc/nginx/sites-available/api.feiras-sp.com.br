@@ -12,6 +12,7 @@ server {
     # redirect 301 https://$host$request_uri;
 
     root /var/www/html;
+    index README.html;
 
     location /v1 {
         uwsgi_pass feiras-sp-v1:9000;

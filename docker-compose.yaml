@@ -56,7 +56,7 @@ services:
       - "./conf/etc/ssl/hosts:/etc/ssl/hosts"
       - "./conf/usr/local/bin/piped-std:/usr/local/bin/piped-std"
       - "./conf/usr/local/bin/nginx:/usr/local/bin/nginx"
-      - "./docs:/var/www/html"
+      - "./docs:/var/www"
     depends_on:
       - "feiras-sp-v1"
     entrypoint: ["/usr/local/bin/piped-std"]
