@@ -6,7 +6,7 @@ u"""Definição de models e mapeamento de tabelas ~ classes."""
 from src.application import db
 
 
-class Model(db.Model):  # pylint: disable=too-few-public-methods
+class Model(db.Model):
     u"""Model base com funções auxiliares."""
 
     __abstract__ = True
@@ -17,3 +17,10 @@ class Model(db.Model):  # pylint: disable=too-few-public-methods
             if not hasattr(self, field):
                 continue
             setattr(self, field, value)
+
+    def as_dict(self):
+        u"""Retorna os campos da tabela como um dicionário."""
+        output = {}
+        for field in self.__table__.columns:
+            output[field.name] = getattr(self, field.name)
+        return output
