@@ -142,13 +142,31 @@ Feature: Entry testing
 
   Scenario: Entry insertion
     When request data is
-        | bairro | distrito |
-        | bairro | distrito |
+        | areap         | bairro          | coddist | codsubpref | distrito    | lat       | logradouro    | long      | nome_feira    | numero | referencia             | regiao5 | regiao8 | registro | setcens         | subprefe    |
+        | 4000000000000 | JARDIM UMARIZAL | 17      | 17         | CAMPO LIMPO | -23619899 | AVENIDA ANACE | -46756883 | AVENIDA ANACE | 319    | ESTRADA DO CAMPO LIMPO | Sul     | Sul 2   | 6543-2   | 400000000000001 | CAMPO LIMPO |
     And I post to /feiras
     Then response code should be 201
     And response body should match
     """
-    {}
+    {
+      "areap": "4000000000000",\s
+      "bairro": "JARDIM UMARIZAL",\s
+      "coddist": "17",\s
+      "codsubpref": "17",\s
+      "distrito": "CAMPO LIMPO",\s
+      "id": 501,\s
+      "lat": "-23619899",\s
+      "logradouro": "AVENIDA ANACE",\s
+      "long": "-46756883",\s
+      "nome_feira": "AVENIDA ANACE",\s
+      "numero": "319",\s
+      "referencia": "ESTRADA DO CAMPO LIMPO",\s
+      "regiao5": "Sul",\s
+      "regiao8": "Sul 2",\s
+      "registro": "6543-2",\s
+      "setcens": "400000000000001",\s
+      "subprefe": "CAMPO LIMPO"
+    }
     """
 
   Scenario: Entry validation
