@@ -190,7 +190,25 @@ Feature: Entry testing
     Then response code should be 200
     And response body should match
     """
-    {}
+    {
+      "areap": "3550308005040",\s
+      "bairro": "VL FORMOSA",\s
+      "coddist": "87",\s
+      "codsubpref": "26",\s
+      "distrito": "VILA FORMOSA",\s
+      "id": 1,\s
+      "lat": "-23558733",\s
+      "logradouro": "RUA MARAGOJIPE",\s
+      "long": "-46550164",\s
+      "nome_feira": "VILA FORMOSA",\s
+      "numero": "123456",\s
+      "referencia": "TV RUA PRETORIA",\s
+      "regiao5": "Leste",\s
+      "regiao8": "Leste 1",\s
+      "registro": "4041-0",\s
+      "setcens": "355030885000091",\s
+      "subprefe": "ARICANDUVA-FORMOSA-CARRAO"
+    }
     """
 
   Scenario: Entry deletion
