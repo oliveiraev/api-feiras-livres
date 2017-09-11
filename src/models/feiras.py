@@ -47,9 +47,9 @@ class Feira(Model):  # pylint: disable=too-few-public-methods
     @classmethod
     def __declare_last__(cls):
         u"""Validação do flask_validator."""
-        flask_validator.ValidateNumeric(cls.id)
-        flask_validator.ValidateNumeric(cls.coddist)
-        flask_validator.ValidateNumeric(cls.codsubpref)
+        flask_validator.ValidateNumeric(cls.id, throw_exception=True)
+        flask_validator.ValidateNumeric(cls.coddist, throw_exception=True)
+        flask_validator.ValidateNumeric(cls.codsubpref, throw_exception=True)
 
 
 try:
