@@ -12,4 +12,10 @@ from src.application import app
 @app.route("/feiras/", methods=["GET"])
 def retrieve():
     u"""Controller para listagem e filtro de feiras."""
-    return flask.jsonify([row.as_dict() for row in feiras.Feira.query.all()])
+    filters = {}
+    for param in "distrito", "regiao5", "nome_feira", "bairro":
+        if param not in flask.request.args:
+            continue
+        filters[param] = flask.request.args[param]
+    rows = feiras.Feira.query.filter_by(**filters)
+    return flask.jsonify([row.as_dict() for row in rows])
