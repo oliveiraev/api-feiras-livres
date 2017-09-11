@@ -44,11 +44,11 @@ class Server(unittest.TestCase):
 
     def test_server_stop(self):
         u"""Teste de chamada ao encerramento do servidor pela thread."""
-        assert self.test_server.instance.server_close.call_count is 0
+        assert self.test_server.instance.shutdown.call_count is 0
         self.test_server.stop()
-        assert self.test_server.instance.server_close.call_count is 0
+        assert self.test_server.instance.shutdown.call_count is 0
         self.test_server.start()
         self.test_server.stop()
-        assert self.test_server.instance.server_close.call_count is 1
+        assert self.test_server.instance.shutdown.call_count is 1
         self.test_server.stop()
-        assert self.test_server.instance.server_close.call_count == 2
+        assert self.test_server.instance.shutdown.call_count == 2

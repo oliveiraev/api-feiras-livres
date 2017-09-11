@@ -9,3 +9,5 @@ caminho da URL, ex:
 /something/another_thing deve ser colocado no controller something.py, e ser
 roteado por um método preferivelmente nomeado another_thing
 """
+
+from src.controllers import erros, feiras  # noqa: F401

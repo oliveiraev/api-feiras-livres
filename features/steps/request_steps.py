@@ -30,8 +30,8 @@ def fill_request(context):
 def execute_request(context, url):
     u"""Executa a requisição."""
     url = "http://127.0.0.1:{}/{}".format(
-        url[int(url.startswith("/")):],
-        context.server.options.get("port")
+        context.server.options.get("port"),
+        url[int(url.startswith("/")):]
     )
     request = context.scenario.request
     request.prepare_url(url, {})
