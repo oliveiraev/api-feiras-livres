@@ -5,7 +5,27 @@ Feature: Entry testing
     When I request /feiras
     Then response body should match
     """
-    \[]
+    \[(
+      {
+        "areap": "\d+",\s
+        "bairro": ".*?",\s
+        "coddist": "\d+",\s
+        "codsubpref": "\d+",\s
+        "distrito": ".*?",\s
+        "id": \d+,\s
+        "lat": "-?\d+",\s
+        "logradouro": ".*?",\s
+        "long": "-?\d+",\s
+        "nome_feira": ".*?",\s
+        "numero": ".*?",\s
+        "referencia": ".*?",\s
+        "regiao5": ".*?",\s
+        "regiao8": ".*?",\s
+        "registro": ".*?",\s
+        "setcens": "\d+",\s
+        "subprefe": ".*?"
+      }(,\s)?){500}
+    ]
     """
 
   Scenario: Entry search

@@ -20,9 +20,3 @@ app.config.update(
 
 
 db = flask_sqlalchemy.SQLAlchemy(app)
-
-
-@app.route("/")
-def hello():
-    u"""Método de teste da aplicação."""
-    return flask.jsonify([])

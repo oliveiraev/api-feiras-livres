@@ -5,4 +5,4 @@ u"""Módulo de acesso à instância da aplicação."""
 
 
 from src.application import app  # noqa: F401
-from src.models import *  # noqa: F401,F403 pylint: disable=wildcard-import
+from src.controllers import *  # noqa: F401,F403 pylint: disable=wildcard-import
