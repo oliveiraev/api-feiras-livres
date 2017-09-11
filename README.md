@@ -46,6 +46,12 @@ requirements.txt``
 
 **É altamente recomendável o uso de um [virtualenv](https://virtualenv.pypa.io/en/stable/)!!**
 
+Há um importador de arquivos csv em ``src`` que pode ser executado informando o caminho do
+arquivo csv a importar:
+
+```shell
+python src/csv_importer.py /path/to/data.csv
+```
 
 ### Testes automatizados
 
