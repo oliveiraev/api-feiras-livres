@@ -39,7 +39,7 @@
       stages: [commit]
       types: [text]
       exclude_types: [csv, markdown]
-      exclude: conf/etc/ssl/hosts
+      exclude: conf/etc/ssl/hosts|docs/
     - id: check-executables-have-shebangs
       name: "General: looking for missing hash bangs on executables"
       stages: [commit]
@@ -65,11 +65,13 @@
       name: "JSON: syntax check"
       stages: [commit]
       types: [json]
+      exclude: docs/
     - id: pretty-format-json
       name: "JSON: indenting with 2 spaces and rearranging properties"
       args: [--autofix, --indent=2]
       stages: [commit]
       types: [json]
+      exclude: docs/
 - repo: https://github.com/Lucas-C/pre-commit-hooks.git
   sha: master
   hooks:
@@ -129,6 +131,15 @@
       types: [python]
       entry: python
       args: ["-m", "pylint"]
+    - id: coverage
+      name: "Python: coverage"
+      language: system
+      stages: [push]
+      types: []
+      always_run: true
+      pass_filenames: false
+      entry: python
+      args: ["cover.py"]
 
 
 # Shellscript

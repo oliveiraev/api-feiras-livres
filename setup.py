@@ -14,7 +14,7 @@ from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
 
-def test_runner():
+def run_unittest():
     u"""Especifica a execução de testes pelo setuptools via unittest."""
     return unittest.TestLoader().discover(".", pattern="*.py")
 
@@ -79,18 +79,19 @@ TESTS_REQUIRE = [
 ]
 
 
-setup(
-    name="feiras-sp",
-    version="0.0.1a0",
-    author="Evandro Oliveira",
-    author_email="evandrofranco@gmail.com",
-    python_requires='>=3.2',
-    install_requires=INSTALL_REQUIRES,
-    tests_require=TESTS_REQUIRE,
-    packages=find_packages(exclude=["features", "tests"]),
-    include_package_data=True,
-    test_suite="setup.test_runner",
-    cmdclass=dict(
-        behave_test=BehaveTest
+if __name__ == "__main__":
+    setup(
+        name="feiras-sp",
+        version="0.0.1a0",
+        author="Evandro Oliveira",
+        author_email="evandrofranco@gmail.com",
+        python_requires='>=3.2',
+        install_requires=INSTALL_REQUIRES,
+        tests_require=TESTS_REQUIRE,
+        packages=find_packages(exclude=["features", "tests"]),
+        include_package_data=True,
+        test_suite="setup.run_unittest",
+        cmdclass=dict(
+            behave_test=BehaveTest
+        )
     )
-)

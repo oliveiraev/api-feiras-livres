@@ -67,13 +67,21 @@ behave
 
 Há uma série de validadores e tarefas automatizadas configuradas que podem ser
 instaladas nos hooks de 'pre-commit' e 'pre-push'. Para isto, basta instalar o
-[tox](https://tox.readthedocs.io/en/latest/) e executar
+[pre-commit](http://pre-commit.com/) e executar
 
 ```
 pre-commit install -t pre-commit
 pre-commit install -t pre-push
 ```
 
+### Cobertura de código
+
+Execute ``python cover.py`` para obter um relatório de cobertura.
+
+O script executará tanto os testes unitários como os testes de integração.
+
+Caso você tenha instalado os hooks de pre-push, este script impedirá o push
+sempre que a cobertura for inferior a 70%.
 
 ## API
 
