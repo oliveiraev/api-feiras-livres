@@ -70,7 +70,7 @@ INSTALL_REQUIRES = [
 
 
 TESTS_REQUIRE = [
-    "behave==1.2.5",
+    "behave==1.2.6",
     "coverage==4.4.1",
     "flake8==3.4.1",
     "mock==2.0.0",
