@@ -73,7 +73,7 @@ TESTS_REQUIRE = [
     "behave==1.2.5",
     "coverage==4.4.1",
     "flake8==3.4.1",
-    "mock==2.0.0",
+    "mock==3.0.5",
     "pylint==1.7.2",
     "requests==2.20.0",
 ]
