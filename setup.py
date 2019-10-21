@@ -2,13 +2,12 @@
 # -*- coding: utf-8 -*-
 # vim: sta sts=4 sw=4 et ai si ff=unix eol fenc=utf-8 nobomb ft=python
 u"""Configuração do setuptools."""
-
-
 import os
-import sys
 import shlex
 import subprocess
+import sys
 import unittest
+
 from setuptools import find_packages
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
