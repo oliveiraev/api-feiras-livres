@@ -74,7 +74,7 @@ TESTS_REQUIRE = [
     "coverage==4.4.1",
     "flake8==3.4.1",
     "mock==2.0.0",
-    "pylint==1.7.2",
+    "pylint==2.4.4",
     "requests==2.20.0",
 ]
 
