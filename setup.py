@@ -42,14 +42,13 @@ class BehaveTest(TestCommand):
                 behave = os.path.join("bin", "behave")
                 if not os.path.exists(behave):
                     behave = "-m behave"
-                cmd_options = self.distribution.command_options["behave_test"].get(
-                    "behave_args", ["", ""]
-                )[1]
-                self.announce("CMDLINE: python %s %s" % (behave, cmd_options), level=3)
+                cmd_options = self.distribution.command_options[
+                    "behave_test"].get("behave_args", ["", ""])[1]
+                self.announce("CMDLINE: python %s %s" % (behave, cmd_options),
+                              level=3)
                 behave_cmd = shlex.split(behave)
-                return subprocess.call(
-                    [sys.executable] + behave_cmd + shlex.split(cmd_options)
-                )
+                return subprocess.call([sys.executable] + behave_cmd +
+                                       shlex.split(cmd_options))
 
         self.behave_command = _BehaveTest(self.distribution)
 
@@ -69,7 +68,6 @@ INSTALL_REQUIRES = [
     "mysql-connector-python==2.1.7",
 ]
 
-
 TESTS_REQUIRE = [
     "behave==1.2.5",
     "coverage==4.4.1",
@@ -78,7 +76,6 @@ TESTS_REQUIRE = [
     "pylint==2.4.4",
     "requests==2.20.0",
 ]
-
 
 if __name__ == "__main__":
     setup(
