@@ -71,7 +71,7 @@ INSTALL_REQUIRES = [
 
 TESTS_REQUIRE = [
     "behave==1.2.5",
-    "coverage==4.4.1",
+    "coverage==5.0.2",
     "flake8==3.4.1",
     "mock==2.0.0",
     "pylint==1.7.2",
