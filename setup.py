@@ -75,7 +75,7 @@ TESTS_REQUIRE = [
     "flake8==3.4.1",
     "mock==2.0.0",
     "pylint==1.7.2",
-    "requests==2.20.0",
+    "requests==2.23.0",
 ]
 
 
