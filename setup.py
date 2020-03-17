@@ -2,13 +2,12 @@
 # -*- coding: utf-8 -*-
 # vim: sta sts=4 sw=4 et ai si ff=unix eol fenc=utf-8 nobomb ft=python
 u"""Configuração do setuptools."""
-
-
 import os
-import sys
 import shlex
 import subprocess
+import sys
 import unittest
+
 from setuptools import find_packages
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
@@ -22,7 +21,7 @@ def run_unittest():
 class BehaveTest(TestCommand):
     u"""Corrige a execução do behave pelo setup.py."""
 
-    user_options = [('behave-args=', 'b', 'Arguments to pass to behave')]
+    user_options = [("behave-args=", "b", "Arguments to pass to behave")]
 
     behave_command = None
 
@@ -44,12 +43,13 @@ class BehaveTest(TestCommand):
                 if not os.path.exists(behave):
                     behave = "-m behave"
                 cmd_options = self.distribution.command_options[
-                    'behave_test'].get('behave_args', ['', ''])[1]
+                    "behave_test"].get("behave_args", ["", ""])[1]
                 self.announce("CMDLINE: python %s %s" % (behave, cmd_options),
                               level=3)
                 behave_cmd = shlex.split(behave)
-                return subprocess.call(
-                    [sys.executable] + behave_cmd + shlex.split(cmd_options))
+                return subprocess.call([sys.executable] + behave_cmd +
+                                       shlex.split(cmd_options))
+
         self.behave_command = _BehaveTest(self.distribution)
 
     def finalize_options(self):
@@ -68,7 +68,6 @@ INSTALL_REQUIRES = [
     "mysql-connector-python==2.1.7",
 ]
 
-
 TESTS_REQUIRE = [
     "behave==1.2.5",
     "coverage==4.4.1",
@@ -78,20 +77,17 @@ TESTS_REQUIRE = [
     "requests==2.20.0",
 ]
 
-
 if __name__ == "__main__":
     setup(
         name="feiras-sp",
         version="0.0.1a0",
         author="Evandro Oliveira",
         author_email="evandrofranco@gmail.com",
-        python_requires='>=3.2',
+        python_requires=">=3.2",
         install_requires=INSTALL_REQUIRES,
         tests_require=TESTS_REQUIRE,
         packages=find_packages(exclude=["features", "tests"]),
         include_package_data=True,
         test_suite="setup.run_unittest",
-        cmdclass=dict(
-            behave_test=BehaveTest
-        )
+        cmdclass=dict(behave_test=BehaveTest),
     )
