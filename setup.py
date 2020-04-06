@@ -62,7 +62,7 @@ class BehaveTest(TestCommand):
 
 
 INSTALL_REQUIRES = [
-    "Flask==1.0",
+    "Flask==1.1.2",
     "Flask-SQLAlchemy==2.2",
     "Flask-Validator==1.2.3",
     "mysql-connector-python==2.1.7",
